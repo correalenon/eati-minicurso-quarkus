@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
@@ -29,6 +30,13 @@ public class JogadorResource {
 	@GET
 	public Response consultarJogadorPeloId(Long id) {
 		Jogador jogador = jogadorService.consultarPeloId(id);
+		return Response.ok().entity(jogador).build();
+	}
+
+	@Path("/{id}")
+	@PUT
+	public Response atualizarJogadorPeloId(Long id, JogadorDTO jogadorDTO) {
+		Jogador jogador = jogadorService.atualizar(id, jogadorDTO);
 		return Response.ok().entity(jogador).build();
 	}
 

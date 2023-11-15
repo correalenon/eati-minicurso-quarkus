@@ -19,8 +19,8 @@ public class JogadorService {
 	}
 
 	@Transactional
-	public Jogador inserir(JogadorDTO jogadorDTO) {
-		Jogador jogador = new Jogador();
+	public Jogador atualizar(Long id, JogadorDTO jogadorDTO) {
+		Jogador jogador = consultarPeloId(id);
 		jogador.setNome(jogadorDTO.getNome());
 		jogador.setTime(jogadorDTO.getTime());
 		jogador.setCamisa(jogadorDTO.getCamisa());
@@ -31,5 +31,15 @@ public class JogadorService {
 	@Transactional
 	public boolean deletarPeloId(Long id) {
 		return Jogador.deleteById(id);
+	}
+
+	@Transactional
+	public Jogador inserir(JogadorDTO jogadorDTO) {
+		Jogador jogador = new Jogador();
+		jogador.setNome(jogadorDTO.getNome());
+		jogador.setTime(jogadorDTO.getTime());
+		jogador.setCamisa(jogadorDTO.getCamisa());
+		jogador.persist();
+		return (Jogador) jogador;
 	}
 }
